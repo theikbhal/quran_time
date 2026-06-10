@@ -3,8 +3,14 @@ import { createRoot } from 'react-dom/client'
 import './index.css'
 import App from './App.jsx'
 
-// Register Service Worker for offline capabilities (PWA)
-if ('serviceWorker' in navigator) {
+// Detect Chrome Extension context and apply styling class
+const isExtension = typeof chrome !== 'undefined' && chrome.runtime && chrome.runtime.id;
+if (isExtension) {
+  document.documentElement.classList.add('is-extension');
+}
+
+// Register Service Worker for offline capabilities (PWA) - ONLY on the web (not in Chrome Extension)
+if (!isExtension && 'serviceWorker' in navigator) {
   window.addEventListener('load', () => {
     navigator.serviceWorker.register('/sw.js')
       .then(reg => {
@@ -14,12 +20,6 @@ if ('serviceWorker' in navigator) {
         console.error('Quran Time: Service Worker registration failed!', err);
       });
   });
-}
-
-// Detect Chrome Extension context and apply styling class
-const isExtension = typeof chrome !== 'undefined' && chrome.runtime && chrome.runtime.id;
-if (isExtension) {
-  document.documentElement.classList.add('is-extension');
 }
 
 createRoot(document.getElementById('root')).render(

@@ -274,10 +274,10 @@ export const parahs = [
 export const getDefaultVideoLink = (parahNum) => {
   const playlistId = "PLIFqLbIyGu85VBS98tuaNe-UgwV7odQvc";
   if (parahNum <= 15) {
-    return `https://www.youtube.com/watch?v=HcxC-BmLJi4&list=${playlistId}&index=${parahNum}`;
+    return `https://www.youtube.com/watch?list=${playlistId}&index=${parahNum}`;
   } else {
     // Juz 16 is index 3 in the provided URL, so index = parahNum - 15 + 2
-    return `https://www.youtube.com/watch?v=V5k0QoSkvxU&list=${playlistId}&index=${parahNum - 15 + 2}`;
+    return `https://www.youtube.com/watch?list=${playlistId}&index=${parahNum - 15 + 2}`;
   }
 };
 

@@ -90,15 +90,31 @@ export function getLocalDateString(date) {
   return `${year}-${month}-${day}`;
 }
 
-export function calculateTodayParah(startDateStr, todayDateStr) {
-  const start = new Date(startDateStr);
-  const today = new Date(todayDateStr);
+export function calculateTodayParah(settings, todayDateInput) {
+  const today = new Date(todayDateInput);
+  const method = settings.calculationMethod || 'hijri';
+  
+  if (method === 'hijri') {
+    const hijri = toHijri(today);
+    // Map Hijri day (1-30) to Parah (1-30). If a Hijri month has 29 days, clamp to 30 just in case.
+    return Math.min(30, Math.max(1, hijri.day));
+  }
+  
+  if (method === 'gregorian') {
+    const day = today.getDate();
+    // Map Gregorian day (1-31) to Parah (1-30), cycling day 31 to Parah 1.
+    return ((day - 1) % 30) + 1;
+  }
+  
+  // Default: 'cycle' (relative to custom start date)
+  const start = new Date(settings.startDate || getLocalDateString(new Date()));
   
   // Set times to midnight to calculate calendar day differences
   start.setHours(0, 0, 0, 0);
-  today.setHours(0, 0, 0, 0);
+  const todayMidnight = new Date(today);
+  todayMidnight.setHours(0, 0, 0, 0);
   
-  const diffTime = today - start;
+  const diffTime = todayMidnight - start;
   const diffDays = Math.floor(diffTime / (1000 * 60 * 60 * 24));
   
   // Cycle between 1 and 30

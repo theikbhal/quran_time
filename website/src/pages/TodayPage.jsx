@@ -9,7 +9,7 @@ export default function TodayPage() {
   const { settings, progress, updateProgress } = useApp();
   
   const todayDateStr = getLocalDateString(new Date());
-  const todayParahNum = calculateTodayParah(settings.startDate, todayDateStr);
+  const todayParahNum = calculateTodayParah(settings, new Date());
   const todayParah = parahs[todayParahNum - 1];
   
   const todayLog = progress[todayDateStr] || {};

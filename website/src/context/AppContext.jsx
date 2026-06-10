@@ -9,7 +9,8 @@ const defaultSettings = {
   dateFormat: 'both', // 'islamic' | 'both' | 'gregorian'
   startDate: getLocalDateString(new Date()), // YYYY-MM-DD
   notificationsEnabled: false,
-  customLinks: {} // maps parah number -> custom URL string
+  customLinks: {}, // maps parah number -> custom URL string
+  calculationMethod: 'hijri' // 'hijri' | 'gregorian' | 'cycle'
 };
 
 export const AppProvider = ({ children }) => {

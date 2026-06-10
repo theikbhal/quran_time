@@ -132,20 +132,51 @@ export default function SettingsPage() {
         <h3 className="text-sm font-bold tracking-wide uppercase text-brand-text">Schedule & Date Settings</h3>
         
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-          {/* Start Date */}
-          <div className="space-y-1.5">
-            <label className="text-xs font-bold text-brand-muted uppercase tracking-wider">Start Tracking Date</label>
-            <input
-              type="date"
-              value={settings.startDate}
-              onChange={(e) => updateSettings({ startDate: e.target.value })}
-              className="w-full bg-brand-secondary/35 border border-brand-border rounded-xl px-3.5 py-2.5 text-brand-text text-sm focus:outline-none focus:border-brand-accent transition-colors"
-            />
-            <p className="text-[10px] text-brand-muted font-medium">Affects which Parah is calculated as "Today's Reading".</p>
+          {/* Today's Parah Calculation Method */}
+          <div className="space-y-1.5 md:col-span-2">
+            <label className="text-xs font-bold text-brand-muted uppercase tracking-wider block">Today's Parah Calculation Method</label>
+            <div className="grid grid-cols-1 sm:grid-cols-3 gap-2.5">
+              {[
+                { id: 'hijri', label: 'Islamic (Hijri) Day' },
+                { id: 'gregorian', label: 'English (Gregorian) Day' },
+                { id: 'cycle', label: 'Cycle From Start Date' }
+              ].map((method) => (
+                <button
+                  key={method.id}
+                  onClick={() => updateSettings({ calculationMethod: method.id })}
+                  className={`py-2 px-3 rounded-lg border text-[10px] font-bold uppercase tracking-wider cursor-pointer transition-colors ${
+                    (settings.calculationMethod || 'hijri') === method.id
+                      ? 'bg-brand-accent/10 border-brand-accent text-brand-accent font-extrabold'
+                      : 'border-brand-border text-brand-muted hover:border-brand-text/30 hover:text-brand-text bg-brand-secondary/20'
+                  }`}
+                >
+                  {method.label}
+                </button>
+              ))}
+            </div>
+            <p className="text-[10px] text-brand-muted font-medium mt-1">
+              {(settings.calculationMethod || 'hijri') === 'hijri' && "Default: Maps today's Juz directly to the active Hijri month date (e.g. 14 Dhul Hijjah = Juz 14)."}
+              {settings.calculationMethod === 'gregorian' && "Maps today's Juz directly to the current English month date, cycling day 31 back to Juz 1."}
+              {settings.calculationMethod === 'cycle' && "Cycles sequentially 1 to 30 starting from your chosen custom Start Tracking Date."}
+            </p>
           </div>
 
+          {/* Start Date - only shown if 'cycle' is active */}
+          {settings.calculationMethod === 'cycle' && (
+            <div className="space-y-1.5">
+              <label className="text-xs font-bold text-brand-muted uppercase tracking-wider">Start Tracking Date</label>
+              <input
+                type="date"
+                value={settings.startDate}
+                onChange={(e) => updateSettings({ startDate: e.target.value })}
+                className="w-full bg-brand-secondary/35 border border-brand-border rounded-xl px-3.5 py-2.5 text-brand-text text-sm focus:outline-none focus:border-brand-accent transition-colors"
+              />
+              <p className="text-[10px] text-brand-muted font-medium">Affects which Parah is calculated as "Today's Reading".</p>
+            </div>
+          )}
+
           {/* Reading Time */}
-          <div className="space-y-1.5">
+          <div className={`space-y-1.5 ${settings.calculationMethod !== 'cycle' ? 'md:col-span-2' : ''}`}>
             <label className="text-xs font-bold text-brand-muted uppercase tracking-wider">Target Reading Time</label>
             <select
               value={settings.readingTime}

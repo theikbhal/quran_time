@@ -1,24 +1,24 @@
-# Logs
-logs
-*.log
+# Dependency directories
+node_modules/
+website/node_modules/
+
+# Web Build output
+website/dist/
+
+# Chrome Extension build outputs (ignored to keep repo clean)
+chrome-extension/assets/
+chrome-extension/index.html
+chrome-extension/manifest.json
+chrome-extension/icon-192.png
+chrome-extension/icon-512.png
+chrome-extension/favicon.svg
+chrome-extension/icons.svg
+chrome-extension/sw.js
+
+# Logs and system files
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
-pnpm-debug.log*
-lerna-debug.log*
-
-node_modules
-dist
-dist-ssr
-*.local
-
-# Editor directories and files
-.vscode/*
-!.vscode/extensions.json
-.idea
 .DS_Store
-*.suo
-*.ntvs*
-*.njsproj
-*.sln
-*.sw?
+.vscode/
+.idea/

@@ -6,7 +6,7 @@
   "scripts": {
     "dev": "vite",
     "build": "vite build",
-    "build:extension": "npm run build && cp manifest.extension.json dist/manifest.json",
+    "build:extension": "vite build && rm -rf ../chrome-extension/* && cp -r dist/* ../chrome-extension/ && cp ../manifest.extension.json ../chrome-extension/manifest.json",
     "lint": "eslint .",
     "preview": "vite preview"
   },

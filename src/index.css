@@ -1,0 +1,173 @@
+@import url('https://fonts.googleapis.com/css2?family=Amiri:ital,wght@0,400;0,700;1,400;1,700&family=Inter:wght@300;400;500;600;700;800&display=swap');
+
+@import "tailwindcss";
+
+@theme {
+  --font-arabic: "Amiri", serif;
+  --font-sans: "Inter", sans-serif;
+  
+  --color-brand-bg: var(--bg);
+  --color-brand-card: var(--bg-card);
+  --color-brand-secondary: var(--bg-secondary);
+  --color-brand-border: var(--border);
+  --color-brand-text: var(--text);
+  --color-brand-muted: var(--text-muted);
+  --color-brand-accent: var(--accent);
+  --color-brand-gold: var(--gold);
+}
+
+/* Theme variables */
+:root, .theme-dark {
+  --bg: #0D1117;
+  --bg-card: #161B22;
+  --bg-secondary: #1C2433;
+  --border: #30373F;
+  --text: #E6EDF3;
+  --text-muted: #8B949E;
+  --accent: #3FB68A; /* Emerald green */
+  --gold: #D4A017;
+  --shadow-glow: 0 0 12px rgba(63, 182, 138, 0.15);
+}
+
+.theme-light {
+  --bg: #FAFAF7;
+  --bg-card: #FFFFFF;
+  --bg-secondary: #F0EDE4;
+  --border: #DDD8CC;
+  --text: #1A1714;
+  --text-muted: #7A7265;
+  --accent: #1B6B3A; /* Forest green */
+  --gold: #B8860B;
+  --shadow-glow: 0 4px 12px rgba(27, 107, 58, 0.08);
+}
+
+.theme-night {
+  --bg: #08080F;
+  --bg-card: #0E0E1A;
+  --bg-secondary: #18182D;
+  --border: #2A2A4A;
+  --text: #C8C8E8;
+  --text-muted: #7E7EA6;
+  --accent: #7C5CBF; /* Purple */
+  --gold: #C8A84B;
+  --shadow-glow: 0 0 16px rgba(124, 92, 191, 0.2);
+}
+
+/* Global resets & typography */
+body {
+  background-color: var(--bg);
+  color: var(--text);
+  font-family: 'Inter', sans-serif;
+  transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
+  min-height: 100vh;
+  margin: 0;
+  padding: 0;
+}
+
+.font-arabic {
+  font-family: 'Amiri', serif;
+  direction: rtl;
+}
+
+/* Islamic Geometric Background Pattern */
+.islamic-bg {
+  position: relative;
+  overflow: hidden;
+}
+
+.islamic-bg::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-image: 
+    radial-gradient(circle at 50% 50%, var(--border) 1.5px, transparent 1.5px),
+    linear-gradient(45deg, transparent 49%, var(--border) 49.5%, var(--border) 50.5%, transparent 51%),
+    linear-gradient(-45deg, transparent 49%, var(--border) 49.5%, var(--border) 50.5%, transparent 51%);
+  background-size: 32px 32px, 32px 32px, 32px 32px;
+  opacity: 0.12;
+  pointer-events: none;
+  z-index: 0;
+  transition: opacity 0.3s ease;
+}
+
+/* Cards with premium details */
+.premium-card {
+  background-color: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  position: relative;
+  overflow: hidden;
+  box-shadow: var(--shadow-glow);
+  transition: all 0.25s ease;
+}
+
+.premium-card::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 3px;
+  background: linear-gradient(90deg, var(--accent), var(--gold));
+}
+
+/* Interactive elements */
+.interactive-hover {
+  transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.interactive-hover:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  border-color: var(--accent);
+}
+
+/* Status markers colors */
+.status-complete {
+  color: #3FB68A;
+}
+.bg-status-complete {
+  background-color: #3FB68A;
+}
+
+.status-partial {
+  color: #D4A017;
+}
+.bg-status-partial {
+  background-color: #D4A017;
+}
+
+.status-no {
+  color: #F47575;
+}
+.bg-status-no {
+  background-color: #F47575;
+}
+
+.status-untouched {
+  color: var(--text-muted);
+}
+.bg-status-untouched {
+  background-color: var(--border);
+}
+
+/* Hide scrollbar for clean appearance */
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+.no-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+/* Chrome Extension Popup sizing constraints */
+.is-extension body {
+  width: 400px;
+  height: 600px;
+  min-height: 600px;
+  max-height: 600px;
+  overflow-y: auto;
+}

@@ -1,0 +1,24 @@
+{
+  "manifest_version": 3,
+  "name": "Quran Time - Daily Parah Tracker",
+  "version": "1.0.0",
+  "description": "One Parah a day. Every day. Track your daily Quran reading, streaks, and reflections.",
+  "permissions": [
+    "storage"
+  ],
+  "action": {
+    "default_popup": "index.html",
+    "default_icon": {
+      "16": "icon-192.png",
+      "32": "icon-192.png",
+      "48": "icon-192.png",
+      "128": "icon-192.png"
+    }
+  },
+  "icons": {
+    "16": "icon-192.png",
+    "32": "icon-192.png",
+    "48": "icon-192.png",
+    "128": "icon-192.png"
+  }
+}
